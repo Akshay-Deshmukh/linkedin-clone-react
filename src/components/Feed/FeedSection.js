@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Icon} from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import './FeedSection.css'
 import InputOptions from "./InputOptions/InputOptions";
@@ -7,20 +6,34 @@ import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import {CalendarViewDay, EventNote} from "@mui/icons-material";
 import Post from "./Post/Post";
+
 function FeedSection(props) {
-    const [posts, setPosts] = useState([]);
-    
+    const [posts, setPosts] = useState([{
+        name: "Akshay",
+        description: "this is a test",
+        message: 'Welcome to linkedin clone',
+    }]);
+    const [input, setInput] = useState('');
+
     const sendPost = (e) => {
         e.preventDefault();
-        
+        setPosts(prevState => {
+            return prevState.concat({
+                name: "Bot Chen",
+                description: "new post",
+                message: input,
+            })
+        })
+        setInput('')
     }
     return (
         <div className={'feed'}>
             <div className={'feed_inputContainer'}>
                 <div className={'feed_input'}>
-                    <CreateIcon />
+                    <CreateIcon/>
                     <form>
-                        <input type={"text"} placeholder={'Start a post'}/>
+                        <input type={"text"} value={input} onChange={(e) => setInput(e.target.value)}
+                               placeholder={'Start a post'}/>
                         <button onClick={sendPost} type={"submit"}>Send</button>
                     </form>
                 </div>
@@ -31,11 +44,14 @@ function FeedSection(props) {
                     <InputOptions Icon={CalendarViewDay} title={'Write article'} color={'#7FC15E'}/>
                 </div>
             </div>
-            {posts.map((post,index) => (
-                <Post />
+            {posts.map((post, index) => (
+                <Post key={index}
+                      name={post.name}
+                      description={post.description}
+                      message={post.message}
 
-                ))}
-        <Post name={'Akshay Deshmukh'} description={'This is a test'} message={'wow this works'} photoUrl={''}/>
+                />
+            )).reverse()}
         </div>
     );
 }

@@ -15,7 +15,7 @@ function Sidebar(props) {
         <div className={'sidebar'}>
             <div className={'sidebar_top'}>
                 <img src={'background.jpg'} alt={''} />
-                <Avatar classes={'sidebar_avatar '}/>
+                <Avatar className={'sidebar_avatar '}/>
                 <h2>Akshay Deshmukh</h2>
                 <h4>akshaydeshmukh@yahoo.com</h4>
             </div>
