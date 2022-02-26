@@ -5,6 +5,7 @@
     margin-right: auto;
     padding-top: 100px;
     padding-bottom: 100px;
+    height: 100vh;
 }
 
 .login > img {
@@ -34,6 +35,7 @@
     color: #fff;
     background-color: #0074b1;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .login_register {

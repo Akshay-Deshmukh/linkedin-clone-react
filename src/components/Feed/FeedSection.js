@@ -6,22 +6,50 @@ import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import {CalendarViewDay, EventNote} from "@mui/icons-material";
 import Post from "./Post/Post";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../Redux/userStore/userSlice";
+import FlipMove from "react-flip-move";
 
 function FeedSection(props) {
+    const user = useSelector(selectUser)
+    
     const [posts, setPosts] = useState([{
         name: "Akshay",
-        description: "this is a test",
+        description: "ad_test@gmail.com",
         message: 'Welcome to linkedin clone',
-    }]);
+        photoUrl: "",
+    },
+        {
+            name: "Tom",
+            description: "tom_test@gmail.com",
+            message: 'This is so cool !!!',
+            photoUrl: "",
+        }
+        ,
+        {
+            name: "Mike",
+            description: "mike_test@gmail.com",
+            message: 'New post animation is great',
+            photoUrl: "",
+        }
+        ,
+        {
+            name: "Jane",
+            description: "jane_test@gmail.com",
+            message: 'Awesome stuff !',
+            photoUrl: "",
+        }
+    ]);
     const [input, setInput] = useState('');
 
     const sendPost = (e) => {
         e.preventDefault();
         setPosts(prevState => {
             return prevState.concat({
-                name: "Bot Chen",
-                description: "new post",
+                name: user.displayName,
+                description: user.email,
                 message: input,
+                photoUrl: user.photoURL
             })
         })
         setInput('')
@@ -44,14 +72,16 @@ function FeedSection(props) {
                     <InputOptions Icon={CalendarViewDay} title={'Write article'} color={'#7FC15E'}/>
                 </div>
             </div>
+            <FlipMove>
             {posts.map((post, index) => (
                 <Post key={index}
                       name={post.name}
                       description={post.description}
                       message={post.message}
-
+                      photoUrl={post.photoUrl}
                 />
             )).reverse()}
+            </FlipMove>
         </div>
     );
 }

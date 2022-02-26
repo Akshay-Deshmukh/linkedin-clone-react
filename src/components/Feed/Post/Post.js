@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import './Post.css'
 import {Avatar} from "@mui/material";
 import InputOptions from "../InputOptions/InputOptions";
@@ -10,11 +10,11 @@ import {
     ShareOutlined,
     ThumbsUpDownOutlined
 } from "@mui/icons-material";
-const Post = ({name, description, message, photoUrl}) => {
+const Post = forwardRef(({name, description, message, photoUrl, email}, ref) => {
     return (
-        <div className={'post'}>
+        <div ref={ref} className={'post'}>
             <div className={'post_header'}>
-                <Avatar />
+                <Avatar src={photoUrl}>{description[0].toUpperCase()}</Avatar>
                 <div className={'post_info'}>
                     <h2>
                         {name}
@@ -37,6 +37,6 @@ const Post = ({name, description, message, photoUrl}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Post;

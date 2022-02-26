@@ -1,7 +1,10 @@
 import React from 'react';
 import './Sidebar.css'
 import {Avatar} from "@mui/material";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../Redux/userStore/userSlice";
 function Sidebar(props) {
+    const user = useSelector(selectUser)
     
     const reactItems = (topics) => {
         return (
@@ -15,9 +18,9 @@ function Sidebar(props) {
         <div className={'sidebar'}>
             <div className={'sidebar_top'}>
                 <img src={'background.jpg'} alt={''} />
-                <Avatar className={'sidebar_avatar '}/>
-                <h2>Akshay Deshmukh</h2>
-                <h4>akshaydeshmukh@yahoo.com</h4>
+                <Avatar className={'sidebar_avatar '} src={user.photoURL}  sx={{ width: 50, height: 50 }}>{user.email[0]} </Avatar>
+                <h2>{user.displayName}</h2>
+                <h4>{user.email}</h4>
             </div>
             
             <div className={'sidebar_stats'}>

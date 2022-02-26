@@ -3,8 +3,13 @@ import './login.css'
 import {auth} from "../../firebase/Firebase";
 import {useDispatch} from "react-redux";
 import {login} from "../../Redux/userStore/userSlice";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
-
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    updateProfile,
+    signInWithEmailAndPassword,
+    browserSessionPersistence, setPersistence
+} from "firebase/auth";
 
 function Login(props) {
     const [name, setName] = useState('');
@@ -21,8 +26,7 @@ function Login(props) {
         }
         await createUserWithEmailAndPassword(auth, email, password)
             .then(async (userAuth) => {
-                console.log(userAuth.user)
-                await userAuth.user.updateProfile({
+                updateProfile(auth.currentUser, {
                     displayName: name,
                     photoURL: profileUrl
                 })
@@ -31,17 +35,25 @@ function Login(props) {
                             email: userAuth.user.email,
                             uid: userAuth.user.uid,
                             displayName: name,
-                            photoUrl: profileUrl
+                            photoURL: profileUrl
                         }))
                     })
             }).catch((error) => alert(error))
 
     }
     
-    const loginApp = () => {
-        if (!name) {
-            return alert('Please enter a full name')
-        }
+    const loginApp = (e) => {
+        e.preventDefault()
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCred) => {
+                dispatch(login({
+                    email: userCred.user.email,
+                    uid: userCred.user.uid,
+                    displayName: userCred.user.displayName,
+                    photoURL: userCred.user.photoURL
+                }))
+            }).catch(error => alert(error))
+
     }
     return (
         <div className={'login'}>
