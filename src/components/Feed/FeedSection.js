@@ -29,14 +29,14 @@ function FeedSection(props) {
         {
             name: "Mike",
             description: "mike_test@gmail.com",
-            message: 'New post animation is great',
+            message: 'New post animation is great, try adding some new post !!',
             photoUrl: "",
         }
         ,
         {
             name: "Jane",
             description: "jane_test@gmail.com",
-            message: 'Awesome stuff !',
+            message: 'This clone is inspired from Linkedin it is also mobile responsive do checkout from desktop for full view 😃',
             photoUrl: "",
         }
     ]);
