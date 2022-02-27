@@ -6,7 +6,7 @@ import FeedSection from "./components/Feed/FeedSection";
 import {useDispatch, useSelector} from "react-redux";
 import {login, logout, selectUser} from "./Redux/userStore/userSlice";
 import Login from "./components/Login/Login";
-import {onAuthStateChanged, setPersistence, browserSessionPersistence } from "firebase/auth";
+import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./firebase/Firebase";
 import Widget from "./components/Widget/Widget";
 

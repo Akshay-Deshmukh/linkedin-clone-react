@@ -59,10 +59,10 @@ function FeedSection(props) {
             <div className={'feed_inputContainer'}>
                 <div className={'feed_input'}>
                     <CreateIcon/>
-                    <form>
+                    <form onSubmit={sendPost}>
                         <input type={"text"} value={input} onChange={(e) => setInput(e.target.value)}
                                placeholder={'Start a post'}/>
-                        <button onClick={sendPost} type={"submit"}>Send</button>
+                        <button onClick={(e) => sendPost(e)}>Send</button>
                     </form>
                 </div>
                 <div className={"feed_inputOptions"}>
